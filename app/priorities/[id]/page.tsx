@@ -1,3 +1,11 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { AppLayout } from "@/components/layout/app-layout"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Pencil, Trash2, ArrowLeft } from "lucide-react"
 import { samplePriorities } from "./data"
 
 export function generateStaticParams() {
@@ -9,15 +17,6 @@ export function generateStaticParams() {
 export default function Page({ params }: { params: { id: string } }) {
   return <PriorityDetail params={params} />
 }
-
-"use client"
-
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { AppLayout } from "@/components/layout/app-layout"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Pencil, Trash2, ArrowLeft } from "lucide-react"
 
 interface Priority {
   id: number

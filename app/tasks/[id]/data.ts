@@ -2,49 +2,41 @@
 export const sampleTasks = [
   {
     id: 1,
-    name: "Redesign homepage",
-    description: "Create a new design for the homepage",
+    name: "Complete Project Proposal",
+    description: "Draft and finalize the project proposal for the new client initiative. Include timeline, resource requirements, and budget estimates.",
     status: "in-progress",
     priority: "high",
-    dueDate: "2025-05-15",
-    assignee: { id: 1, name: "John Doe" },
-    tags: ["Design", "UI/UX"],
+    dueDate: "2024-04-15",
+    assignee: {
+      id: 1,
+      name: "John Doe"
+    },
+    tags: ["proposal", "client", "planning"]
   },
   {
     id: 2,
-    name: "Fix payment bug",
-    description: "Investigate and fix payment processing issue",
+    name: "Review Q1 Reports",
+    description: "Analyze and review Q1 performance reports. Prepare summary of key findings and recommendations for the management team.",
     status: "todo",
-    priority: "high",
-    assignee: { id: 3, name: "Mike Johnson" },
-    tags: ["Bug", "Critical"],
+    priority: "medium",
+    dueDate: "2024-04-10",
+    assignee: {
+      id: 2,
+      name: "Jane Smith"
+    },
+    tags: ["reports", "quarterly", "analysis"]
   },
   {
     id: 3,
-    name: "Write documentation",
-    description: "Create user documentation for new features",
-    status: "review",
-    priority: "medium",
-    dueDate: "2025-04-30",
-    assignee: { id: 2, name: "Jane Smith" },
-    tags: ["Documentation"],
-  },
-  {
-    id: 4,
-    name: "Implement authentication",
-    description: "Add user authentication system",
-    status: "todo",
-    priority: "high",
-    tags: ["Backend", "Security"],
-  },
-  {
-    id: 5,
-    name: "Optimize database",
-    description: "Improve database query performance",
-    status: "in-progress",
-    priority: "medium",
-    dueDate: "2025-05-05",
-    assignee: { id: 3, name: "Mike Johnson" },
-    tags: ["Performance", "Database"],
+    name: "Team Training Session",
+    description: "Organize and conduct training session on new project management tools for the development team.",
+    status: "done",
+    priority: "low",
+    dueDate: "2024-03-30",
+    assignee: {
+      id: 3,
+      name: "Mike Johnson"
+    },
+    tags: ["training", "team", "development"]
   }
 ] 
