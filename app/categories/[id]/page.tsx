@@ -1,5 +1,21 @@
 "use client"
 
+// Sample Categories Data (in a real app, this would come from an API)
+const sampleCategories = [
+  { id: 1, name: "Work", description: "Work-related tasks and projects" },
+  { id: 2, name: "Personal", description: "Personal tasks and errands" },
+  { id: 3, name: "School", description: "All school configuration starts from here" },
+  { id: 4, name: "Health", description: "Health and fitness related tasks" },
+  { id: 5, name: "Finance", description: "Financial tasks and goals" },
+]
+
+// This function tells Next.js which dynamic paths to pre-render
+export function generateStaticParams() {
+  return sampleCategories.map((category) => ({
+    id: category.id.toString(),
+  }))
+}
+
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { AppLayout } from "@/components/layout/app-layout"
@@ -33,16 +49,6 @@ export default function CategoryDetail({ params }: { params: { id: string } }) {
     // In a real app, you would fetch the category from an API
     // For this demo, we'll use the ID from the URL and mock data
     const categoryId = Number.parseInt(params.id)
-
-    // Sample Categories Data (in a real app, this would come from an API)
-    const sampleCategories = [
-      { id: 1, name: "Work", description: "Work-related tasks and projects" },
-      { id: 2, name: "Personal", description: "Personal tasks and errands" },
-      { id: 3, name: "School", description: "All school configuration starts from here" },
-      { id: 4, name: "Health", description: "Health and fitness related tasks" },
-      { id: 5, name: "Finance", description: "Financial tasks and goals" },
-    ]
-
     const foundCategory = sampleCategories.find((c) => c.id === categoryId)
     setCategory(foundCategory || null)
     setLoading(false)

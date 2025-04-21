@@ -13,6 +13,22 @@ interface Priority {
   description: string
 }
 
+// Sample Priorities Data (in a real app, this would come from an API)
+const samplePriorities = [
+  { id: 1, name: "High", color: "red", description: "Urgent tasks that need immediate attention" },
+  { id: 2, name: "Medium", color: "yellow", description: "Important tasks but not urgent" },
+  { id: 3, name: "Low", color: "green", description: "Tasks that can be done when time permits" },
+  { id: 4, name: "Critical", color: "purple", description: "Emergency tasks that require immediate action" },
+  { id: 5, name: "Normal", color: "blue", description: "Regular tasks with standard priority" }
+]
+
+// This function tells Next.js which dynamic paths to pre-render
+export function generateStaticParams() {
+  return samplePriorities.map((priority) => ({
+    id: priority.id.toString(),
+  }))
+}
+
 export default function PriorityDetail({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
@@ -32,13 +48,6 @@ export default function PriorityDetail({ params }: { params: { id: string } }) {
     // In a real app, you would fetch the priority from an API
     // For this demo, we'll use the ID from the URL and mock data
     const priorityId = Number.parseInt(params.id)
-
-    // Sample Priorities Data (in a real app, this would come from an API)
-    const samplePriorities = [
-      { id: 1, name: "High", description: "Urgent tasks that need immediate attention" },
-      { id: 2, name: "Medium", description: "Important tasks with flexible deadlines" },
-      { id: 3, name: "Low", description: "Tasks that can be completed when time permits" },
-    ]
 
     const foundPriority = samplePriorities.find((p) => p.id === priorityId)
     setPriority(foundPriority || null)

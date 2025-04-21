@@ -26,6 +26,22 @@ interface Task {
   tags: string[]
 }
 
+// Sample Tasks Data (in a real app, this would come from an API)
+const sampleTasks = [
+  { id: 1, title: "Complete project proposal", status: "In Progress" },
+  { id: 2, title: "Review code changes", status: "Pending" },
+  { id: 3, title: "Update documentation", status: "Completed" },
+  { id: 4, title: "Schedule team meeting", status: "Pending" },
+  { id: 5, title: "Test new features", status: "In Progress" },
+]
+
+// This function tells Next.js which dynamic paths to pre-render
+export function generateStaticParams() {
+  return sampleTasks.map((task) => ({
+    id: task.id.toString(),
+  }))
+}
+
 export default function TaskDetail({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
@@ -46,76 +62,6 @@ export default function TaskDetail({ params }: { params: { id: string } }) {
     // In a real app, you would fetch the task from an API
     // For this demo, we'll use the ID from the URL and mock data
     const taskId = Number.parseInt(params.id)
-
-    // Sample Tasks Data (in a real app, this would come from an API)
-    const sampleTasks = [
-      {
-        id: 1,
-        name: "Redesign homepage",
-        description: "Create a new design for the homepage",
-        status: "in-progress",
-        priority: "high",
-        dueDate: "2025-05-15",
-        assignee: { id: 1, name: "John Doe" },
-        tags: ["Design", "UI/UX"],
-      },
-      {
-        id: 2,
-        name: "Fix payment bug",
-        description: "Investigate and fix payment processing issue",
-        status: "todo",
-        priority: "high",
-        assignee: { id: 3, name: "Mike Johnson" },
-        tags: ["Bug", "Critical"],
-      },
-      {
-        id: 3,
-        name: "Write documentation",
-        description: "Create user documentation for new features",
-        status: "review",
-        priority: "medium",
-        dueDate: "2025-04-30",
-        assignee: { id: 2, name: "Jane Smith" },
-        tags: ["Documentation"],
-      },
-      {
-        id: 4,
-        name: "Implement authentication",
-        description: "Add user authentication system",
-        status: "todo",
-        priority: "high",
-        tags: ["Backend", "Security"],
-      },
-      {
-        id: 5,
-        name: "Optimize database",
-        description: "Improve database query performance",
-        status: "in-progress",
-        priority: "medium",
-        dueDate: "2025-05-05",
-        assignee: { id: 3, name: "Mike Johnson" },
-        tags: ["Performance", "Database"],
-      },
-      {
-        id: 6,
-        name: "Weekly team meeting",
-        description: "Regular team sync-up",
-        status: "todo",
-        priority: "medium",
-        dueDate: "2025-04-25",
-        tags: ["Meeting"],
-      },
-      {
-        id: 7,
-        name: "Client presentation",
-        description: "Prepare slides for client meeting",
-        status: "in-progress",
-        priority: "high",
-        dueDate: "2025-04-28",
-        assignee: { id: 1, name: "John Doe" },
-        tags: ["Presentation", "Client"],
-      },
-    ]
 
     const foundTask = sampleTasks.find((t) => t.id === taskId)
     setTask(foundTask || null)
