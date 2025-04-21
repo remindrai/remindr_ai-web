@@ -1,3 +1,15 @@
+import { sampleCategories } from "./data"
+
+export function generateStaticParams() {
+  return sampleCategories.map((category) => ({
+    id: category.id.toString(),
+  }))
+}
+
+export default function Page({ params }: { params: { id: string } }) {
+  return <CategoryDetail params={params} />
+}
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -6,7 +18,6 @@ import { AppLayout } from "@/components/layout/app-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Pencil, Trash2, ArrowLeft } from "lucide-react"
-import { sampleCategories } from "./generateStaticParams"
 
 interface Category {
   id: number
@@ -14,7 +25,7 @@ interface Category {
   description: string
 }
 
-export default function CategoryDetail({ params }: { params: { id: string } }) {
+function CategoryDetail({ params }: { params: { id: string } }) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [isClient, setIsClient] = useState(false)

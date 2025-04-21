@@ -1,3 +1,15 @@
+import { samplePriorities } from "./data"
+
+export function generateStaticParams() {
+  return samplePriorities.map((priority) => ({
+    id: priority.id.toString(),
+  }))
+}
+
+export default function Page({ params }: { params: { id: string } }) {
+  return <PriorityDetail params={params} />
+}
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -6,7 +18,6 @@ import { AppLayout } from "@/components/layout/app-layout"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Pencil, Trash2, ArrowLeft } from "lucide-react"
-import { samplePriorities } from "./generateStaticParams"
 
 interface Priority {
   id: number
@@ -15,7 +26,7 @@ interface Priority {
   color?: string
 }
 
-export default function PriorityDetail({ params }: { params: { id: string } }) {
+function PriorityDetail({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
   const [priority, setPriority] = useState<Priority | null>(null)

@@ -1,3 +1,15 @@
+import { sampleTasks } from "./data"
+
+export function generateStaticParams() {
+  return sampleTasks.map((task) => ({
+    id: task.id.toString(),
+  }))
+}
+
+export default function Page({ params }: { params: { id: string } }) {
+  return <TaskDetail params={params} />
+}
+
 "use client"
 
 import { useEffect, useState } from "react"
@@ -11,7 +23,6 @@ import { Pencil, Trash2, ArrowLeft, Calendar, Tag, MessageSquare } from "lucide-
 import { CommunicationHistory } from "@/components/communication/communication-history"
 import { FollowUpSchedule } from "@/components/communication/follow-up-schedule"
 import { CommunicationStatus } from "@/components/communication/communication-status"
-import { sampleTasks } from "./generateStaticParams"
 
 interface Task {
   id: number
@@ -27,7 +38,7 @@ interface Task {
   tags: string[]
 }
 
-export default function TaskDetail({ params }: { params: { id: string } }) {
+function TaskDetail({ params }: { params: { id: string } }) {
   const router = useRouter()
   const [isClient, setIsClient] = useState(false)
   const [task, setTask] = useState<Task | null>(null)
