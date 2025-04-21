@@ -11,6 +11,7 @@ import { Pencil, Trash2, ArrowLeft, Calendar, Tag, MessageSquare } from "lucide-
 import { CommunicationHistory } from "@/components/communication/communication-history"
 import { FollowUpSchedule } from "@/components/communication/follow-up-schedule"
 import { CommunicationStatus } from "@/components/communication/communication-status"
+import { sampleTasks } from "./generateStaticParams"
 
 interface Task {
   id: number
@@ -24,22 +25,6 @@ interface Task {
     name: string
   }
   tags: string[]
-}
-
-// Sample Tasks Data (in a real app, this would come from an API)
-const sampleTasks = [
-  { id: 1, title: "Complete project proposal", status: "In Progress" },
-  { id: 2, title: "Review code changes", status: "Pending" },
-  { id: 3, title: "Update documentation", status: "Completed" },
-  { id: 4, title: "Schedule team meeting", status: "Pending" },
-  { id: 5, title: "Test new features", status: "In Progress" },
-]
-
-// This function tells Next.js which dynamic paths to pre-render
-export function generateStaticParams() {
-  return sampleTasks.map((task) => ({
-    id: task.id.toString(),
-  }))
 }
 
 export default function TaskDetail({ params }: { params: { id: string } }) {
@@ -62,7 +47,6 @@ export default function TaskDetail({ params }: { params: { id: string } }) {
     // In a real app, you would fetch the task from an API
     // For this demo, we'll use the ID from the URL and mock data
     const taskId = Number.parseInt(params.id)
-
     const foundTask = sampleTasks.find((t) => t.id === taskId)
     setTask(foundTask || null)
     setLoading(false)
